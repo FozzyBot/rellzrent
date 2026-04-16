@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Rell'z Rent | Rental Akun FF</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0a0f1e 0%, #0c1222 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle at 15% 30%, rgba(255, 80, 40, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 70%, rgba(255, 200, 50, 0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* CONTAINER LEBAR */
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* CARD UTAMA - LEBAR & GAK KURUS */
+    .card {
+      background: rgba(18, 25, 45, 0.8);
+      backdrop-filter: blur(14px);
+      border-radius: 2.5rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 140, 70, 0.15);
+      border: 1px solid rgba(255, 140, 70, 0.25);
+      text-align: center;
+    }
+
+    /* JUDUL dengan efek smooth muncul */
+    .title-smooth {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFB347, #FF7E33, #FF5722);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: smoothPopUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes smoothPopUp {
+      0% {
+        opacity: 0;
+        transform: translateY(35px) scale(0.92);
+        filter: blur(8px);
+      }
+      40% {
+        opacity: 0.7;
+        transform: translateY(-4px) scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    /* teks kecil di bawah judul */
+    .sub-text {
+      font-size: 0.9rem;
+      color: #bbccff;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* AREA FOTO - Bisa diklik */
+    .photo-area {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 1.8rem;
+      padding: 1.2rem;
+      margin: 0.5rem 0 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255, 140, 70, 0.3);
+    }
+
+    .photo-area:hover {
+      transform: scale(1.01);
+      border-color: #ff7e33;
+      background: rgba(0, 0, 0, 0.45);
+      box-shadow: 0 10px 25px rgba(255, 90, 40, 0.2);
+    }
+
+    .photo-frame {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      background: #11161f;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 1.5rem;
+    }
+
+    .click-hint {
+      margin-top: 0.8rem;
+      font-size: 0.75rem;
+      color: #ffaa66;
+      font-weight: 500;
+    }
+
+    /* 3 CARD PAKET (kaya kotak) */
+    .rental-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .rental-card {
+      background: rgba(12, 20, 30, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 1.8rem;
+      padding: 1.5rem 1.2rem;
+      flex: 1 1 200px;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255, 110, 50, 0.25);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .rental-card:hover {
+      transform: translateY(-6px);
+      border-color: #ff7e33;
+      background: rgba(25, 35, 55, 0.8);
+      box-shadow: 0 15px 25px rgba(255, 70, 30, 0.15);
+    }
+
+    .ff-icon {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .rental-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #FFB347;
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    .rental-desc {
+      font-size: 0.8rem;
+      color: #aab8e5;
+      margin-bottom: 0.75rem;
+    }
+
+    .price {
+      font-weight: 700;
+      background: #ff5e2e20;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #ffaa66;
+    }
+
+    /* TOMBOL RENTAL */
+    .btn-rent {
+      background: linear-gradient(95deg, #ff5722, #ff7e33);
+      border: none;
+      padding: 0.9rem 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 3rem;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 20px -5px rgba(255, 70, 30, 0.4);
+      margin: 0.5rem 0;
+      font-family: inherit;
+    }
+
+    .btn-rent:hover {
+      transform: scale(1.02);
+      background: linear-gradient(95deg, #ff6a38, #ff9040);
+    }
+
+    .footer-note {
+      margin-top: 1.8rem;
+      font-size: 0.7rem;
+      color: #6a7aa8;
+      border-top: 1px dashed rgba(255, 140, 70, 0.3);
+      padding-top: 1.2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* HALAMAN HARGA (awalnya hidden) */
+    .price-page {
+      display: none;
+    }
+
+    .price-page.active {
+      display: block;
+      animation: scaleFadeIn 0.45s ease forwards;
+    }
+
+    .main-page.hide {
+      display: none;
+    }
+
+    @keyframes scaleFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .price-title {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFB347, #FF5722);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-sub {
+      color: #aaaaff;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-list {
+      margin: 1.2rem 0;
+      text-align: left;
+    }
+
+    .price-item {
+      background: rgba(255, 125, 50, 0.12);
+      margin: 0.7rem 0;
+      padding: 0.9rem 1.2rem;
+      border-radius: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      border-left: 4px solid #ff7e33;
+      transition: all 0.2s;
+    }
+
+    .price-item span:first-child {
+      color: #FFD966;
+      font-size: 1rem;
+    }
+
+    .price-item span:last-child {
+      color: #ffaa66;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .btn-exit {
+      background: rgba(255, 70, 30, 0.85);
+      border: none;
+      padding: 0.9rem 1.5rem;
+      font-weight: bold;
+      border-radius: 3rem;
+      color: white;
+      width: 100%;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn-exit:hover {
+      background: #ff5722;
+      transform: scale(1.01);
+    }
+
+    hr {
+      border-color: rgba(255, 140, 70, 0.2);
+      margin: 1rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .title-smooth {
+        font-size: 2.5rem;
+      }
+      .rental-grid {
+        gap: 1rem;
+      }
+      .rental-card {
+        flex: 1 1 160px;
+      }
+      .card {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .price-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HALAMAN UTAMA (foto + 3 card paket) -->
+    <div id="mainPage" class="main-page">
+      <div class="card">
+        <!-- Rell'z Rent paling atas + efek smooth -->
+        <div class="title-smooth">Rell'z Rent</div>
+        <div class="sub-text">Kami Menyediakan Akun Free Fire Rental</div>
+
+        <!-- AREA FOTO BISA DI KLIK -->
+        <div class="photo-area" id="clickablePhoto">
+          <div class="photo-frame">
+            <!-- GANTI NAMA FILE FOTO DI SINI -->
+            <img src="akun_ff1.jpg" alt="Foto Akun Free Fire" onerror="this.src='https://placehold.co/400x500/1e2a3a/ff7e33?text=Akun+FF+Premium'">
+          </div>
+          <div class="click-hint">👇 TEKAN FOTO UNTUK LIHAT HARGA LENGKAP 👇</div>
+        </div>
+
+        <!-- 3 CARD PAKET (kaya kotak, gak kurus) -->
+        <div class="rental-grid">
+          <div class="rental-card">
+            <div class="ff-icon">👑</div>
+            <div class="rental-title">Sultan Elite</div>
+            <div class="rental-desc">Akun FF Max | Lv.80+</div>
+            <div class="price">Mulai 35K/minggu</div>
+          </div>
+          <div class="rental-card">
+            <div class="ff-icon">⚡</div>
+            <div class="rental-title">Pro Harian</div>
+            <div class="rental-desc">Skin Legend+ Bundle</div>
+            <div class="price">15K/hari</div>
+          </div>
+          <div class="rental-card">
+            <div class="ff-icon">🎮</div>
+            <div class="rental-title">Sewa Bulanan</div>
+            <div class="rental-desc">Unlock All Hero</div>
+            <div class="price">99K/bulan</div>
+          </div>
+        </div>
+
+        <!-- Tombol Rental -->
+        <button class="btn-rent" id="rentButton">📱 Rental Sekarang</button>
+
+        <div class="footer-note">
+          <span>✅ Akun Premium Ready</span>
+          <span>⚡ Proses Cepat</span>
+          <span>🔒 100% Aman</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALAMAN HARGA LENGKAP (muncul setelah klik foto) -->
+    <div id="pricePage" class="price-page">
+      <div class="card">
+        <div class="price-title">READY AKUN RENTAL</div>
+        <div class="price-sub">✨ Free Fire • M1887 Lv.14 ✨</div>
+
+        <div class="price-list">
+          <div class="price-item">
+            <span>⏱️ 1 JAM</span>
+            <span>5K</span>
+          </div>
+          <div class="price-item">
+            <span>⏱️ 2 JAM</span>
+            <span>8K</span>
+          </div>
+          <div class="price-item">
+            <span>⏱️ 3 JAM</span>
+            <span>13K</span>
+          </div>
+          <div class="price-item">
+            <span>📚 PAKET SEKOLAH</span>
+            <span>25K</span>
+          </div>
+          <div class="price-item">
+            <span>🌙 PAKET MALAM</span>
+            <span>25K</span>
+          </div>
+          <div class="price-item">
+            <span>📆 HARIAN</span>
+            <span>45K</span>
+          </div>
+        </div>
+
+        <hr>
+        <div style="font-size: 0.75rem; color: #bbccff; margin: 0.3rem 0;">
+          ✅ Order via WhatsApp<br>
+          ✅ Akun langsung aktif
+        </div>
+
+        <button class="btn-exit" id="exitButton">◀ KEMBALI KE HALAMAN UTAMA</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const mainPage = document.getElementById('mainPage');
+    const pricePage = document.getElementById('pricePage');
+    const clickablePhoto = document.getElementById('clickablePhoto');
+    const exitBtn = document.getElementById('exitButton');
+    const rentBtn = document.getElementById('rentButton');
+
+    // Saat klik FOTO → pindah ke halaman harga dengan efek smooth
+    clickablePhoto.addEventListener('click', function() {
+      mainPage.style.transition = 'opacity 0.25s ease';
+      mainPage.style.opacity = '0';
+      setTimeout(() => {
+        mainPage.classList.add('hide');
+        mainPage.style.opacity = '';
+        pricePage.classList.add('active');
+        pricePage.style.animation = 'none';
+        pricePage.offsetHeight;
+        pricePage.style.animation = 'scaleFadeIn 0.45s ease forwards';
+      }, 250);
+    });
+
+    // Tombol KELUAR → balik ke halaman utama
+    exitBtn.addEventListener('click', function() {
+      pricePage.style.opacity = '0';
+      pricePage.style.transform = 'scale(0.96)';
+      pricePage.style.transition = 'all 0.2s ease';
+      
+      setTimeout(() => {
+        pricePage.classList.remove('active');
+        pricePage.style.opacity = '';
+        pricePage.style.transform = '';
+        pricePage.style.transition = '';
+        
+        mainPage.classList.remove('hide');
+        mainPage.style.opacity = '0';
+        mainPage.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => {
+          mainPage.style.opacity = '1';
+        }, 20);
+      }, 200);
+    });
+
+    // Tombol Rental Sekarang (demo WhatsApp)
+    rentBtn.addEventListener('click', function() {
+      const phoneNumber = "6281234567890";
+      const message = "Halo kak, saya mau rental akun FF. Apakah masih tersedia?";
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    });
+
+    // State awal
+    mainPage.classList.remove('hide');
+    pricePage.classList.remove('active');
+    mainPage.style.opacity = '1';
+  </script>
+</body>
+</html>
