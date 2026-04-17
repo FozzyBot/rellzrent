@@ -31,15 +31,13 @@
       pointer-events: none;
     }
 
-    /* CONTAINER LEBAR */
     .container {
-      max-width: 900px;
+      max-width: 550px;
       width: 100%;
     }
 
-    /* CARD UTAMA - LEBAR & GAK KURUS */
     .card {
-      background: rgba(18, 25, 45, 0.8);
+      background: rgba(18, 25, 45, 0.85);
       backdrop-filter: blur(14px);
       border-radius: 2.5rem;
       padding: 2.5rem 2rem;
@@ -78,7 +76,6 @@
       }
     }
 
-    /* teks kecil di bawah judul */
     .sub-text {
       font-size: 0.9rem;
       color: #bbccff;
@@ -100,7 +97,7 @@
       background: rgba(0, 0, 0, 0.35);
       border-radius: 1.8rem;
       padding: 1.2rem;
-      margin: 0.5rem 0 1.5rem;
+      margin: 0.5rem 0 1rem;
       cursor: pointer;
       transition: all 0.25s ease;
       border: 1px solid rgba(255, 140, 70, 0.3);
@@ -136,85 +133,6 @@
       font-weight: 500;
     }
 
-    /* 3 CARD PAKET (kaya kotak) */
-    .rental-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      margin: 2rem 0 1.5rem;
-    }
-
-    .rental-card {
-      background: rgba(12, 20, 30, 0.7);
-      backdrop-filter: blur(4px);
-      border-radius: 1.8rem;
-      padding: 1.5rem 1.2rem;
-      flex: 1 1 200px;
-      transition: all 0.25s ease;
-      border: 1px solid rgba(255, 110, 50, 0.25);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .rental-card:hover {
-      transform: translateY(-6px);
-      border-color: #ff7e33;
-      background: rgba(25, 35, 55, 0.8);
-      box-shadow: 0 15px 25px rgba(255, 70, 30, 0.15);
-    }
-
-    .ff-icon {
-      font-size: 2.4rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .rental-title {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #FFB347;
-      margin: 0.5rem 0 0.25rem;
-    }
-
-    .rental-desc {
-      font-size: 0.8rem;
-      color: #aab8e5;
-      margin-bottom: 0.75rem;
-    }
-
-    .price {
-      font-weight: 700;
-      background: #ff5e2e20;
-      display: inline-block;
-      padding: 0.3rem 1rem;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      color: #ffaa66;
-    }
-
-    /* TOMBOL RENTAL */
-    .btn-rent {
-      background: linear-gradient(95deg, #ff5722, #ff7e33);
-      border: none;
-      padding: 0.9rem 2rem;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 3rem;
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 10px 20px -5px rgba(255, 70, 30, 0.4);
-      margin: 0.5rem 0;
-      font-family: inherit;
-    }
-
-    .btn-rent:hover {
-      transform: scale(1.02);
-      background: linear-gradient(95deg, #ff6a38, #ff9040);
-    }
-
     .footer-note {
       margin-top: 1.8rem;
       font-size: 0.7rem;
@@ -227,7 +145,7 @@
       flex-wrap: wrap;
     }
 
-    /* HALAMAN HARGA (awalnya hidden) */
+    /* HALAMAN HARGA */
     .price-page {
       display: none;
     }
@@ -283,6 +201,12 @@
       font-weight: 600;
       border-left: 4px solid #ff7e33;
       transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .price-item:hover {
+      background: rgba(255, 125, 50, 0.25);
+      transform: translateX(5px);
     }
 
     .price-item span:first-child {
@@ -320,31 +244,25 @@
       margin: 1rem 0;
     }
 
-    @media (max-width: 700px) {
-      .title-smooth {
-        font-size: 2.5rem;
-      }
-      .rental-grid {
-        gap: 1rem;
-      }
-      .rental-card {
-        flex: 1 1 160px;
-      }
+    @media (max-width: 550px) {
       .card {
         padding: 1.5rem;
       }
-    }
-
-    @media (max-width: 550px) {
+      .title-smooth {
+        font-size: 2.5rem;
+      }
       .price-title {
         font-size: 1.5rem;
+      }
+      .price-item span:first-child {
+        font-size: 0.9rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- HALAMAN UTAMA (foto + 3 card paket) -->
+    <!-- HALAMAN UTAMA (foto saja) -->
     <div id="mainPage" class="main-page">
       <div class="card">
         <!-- Rell'z Rent paling atas + efek smooth -->
@@ -357,33 +275,8 @@
             <!-- GANTI NAMA FILE FOTO DI SINI -->
             <img src="akun_ff1.jpg" alt="Foto Akun Free Fire" onerror="this.src='https://placehold.co/400x500/1e2a3a/ff7e33?text=Akun+FF+Premium'">
           </div>
-          <div class="click-hint">👇 TEKAN FOTO UNTUK LIHAT HARGA LENGKAP 👇</div>
+          <div class="click-hint">👇 TEKAN FOTO UNTUK LIHAT HARGA SEWA 👇</div>
         </div>
-
-        <!-- 3 CARD PAKET (kaya kotak, gak kurus) -->
-        <div class="rental-grid">
-          <div class="rental-card">
-            <div class="ff-icon">👑</div>
-            <div class="rental-title">Sultan Elite</div>
-            <div class="rental-desc">Akun FF Max | Lv.80+</div>
-            <div class="price">Mulai 35K/minggu</div>
-          </div>
-          <div class="rental-card">
-            <div class="ff-icon">⚡</div>
-            <div class="rental-title">Pro Harian</div>
-            <div class="rental-desc">Skin Legend+ Bundle</div>
-            <div class="price">15K/hari</div>
-          </div>
-          <div class="rental-card">
-            <div class="ff-icon">🎮</div>
-            <div class="rental-title">Sewa Bulanan</div>
-            <div class="rental-desc">Unlock All Hero</div>
-            <div class="price">99K/bulan</div>
-          </div>
-        </div>
-
-        <!-- Tombol Rental -->
-        <button class="btn-rent" id="rentButton">📱 Rental Sekarang</button>
 
         <div class="footer-note">
           <span>✅ Akun Premium Ready</span>
@@ -400,27 +293,27 @@
         <div class="price-sub">✨ Free Fire • M1887 Lv.14 ✨</div>
 
         <div class="price-list">
-          <div class="price-item">
+          <div class="price-item" data-paket="1 JAM - 5K">
             <span>⏱️ 1 JAM</span>
             <span>5K</span>
           </div>
-          <div class="price-item">
+          <div class="price-item" data-paket="2 JAM - 8K">
             <span>⏱️ 2 JAM</span>
             <span>8K</span>
           </div>
-          <div class="price-item">
+          <div class="price-item" data-paket="3 JAM - 13K">
             <span>⏱️ 3 JAM</span>
             <span>13K</span>
           </div>
-          <div class="price-item">
+          <div class="price-item" data-paket="PAKET SEKOLAH - 25K">
             <span>📚 PAKET SEKOLAH</span>
             <span>25K</span>
           </div>
-          <div class="price-item">
+          <div class="price-item" data-paket="PAKET MALAM - 25K">
             <span>🌙 PAKET MALAM</span>
             <span>25K</span>
           </div>
-          <div class="price-item">
+          <div class="price-item" data-paket="HARIAN - 45K">
             <span>📆 HARIAN</span>
             <span>45K</span>
           </div>
@@ -428,7 +321,7 @@
 
         <hr>
         <div style="font-size: 0.75rem; color: #bbccff; margin: 0.3rem 0;">
-          ✅ Order via WhatsApp<br>
+          ✅ Klik paket untuk order via WhatsApp<br>
           ✅ Akun langsung aktif
         </div>
 
@@ -442,7 +335,7 @@
     const pricePage = document.getElementById('pricePage');
     const clickablePhoto = document.getElementById('clickablePhoto');
     const exitBtn = document.getElementById('exitButton');
-    const rentBtn = document.getElementById('rentButton');
+    const priceItems = document.querySelectorAll('.price-item');
 
     // Saat klik FOTO → pindah ke halaman harga dengan efek smooth
     clickablePhoto.addEventListener('click', function() {
@@ -479,11 +372,14 @@
       }, 200);
     });
 
-    // Tombol Rental Sekarang (demo WhatsApp)
-    rentBtn.addEventListener('click', function() {
-      const phoneNumber = "6281234567890";
-      const message = "Halo kak, saya mau rental akun FF. Apakah masih tersedia?";
-      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    // Klik item harga → langsung order WhatsApp
+    priceItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const paket = this.getAttribute('data-paket');
+        const phoneNumber = "6281330269327"; // GANTI DENGAN NOMOR WHATSAPP KAMU
+        const message = `Halo Kak, saya mau rental akun FF dengan paket: ${paket}. Apakah masih tersedia?`;
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+      });
     });
 
     // State awal
