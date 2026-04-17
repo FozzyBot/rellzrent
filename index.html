@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Rell'z Rent | Spek Akun FF</title>
+  <title>Rell'z Rent | Spek & Rental Akun FF</title>
   <style>
     * {
       margin: 0;
@@ -46,7 +46,6 @@
       text-align: center;
     }
 
-    /* JUDUL dengan efek smooth muncul */
     .title-smooth {
       font-size: 3.5rem;
       font-weight: 800;
@@ -92,7 +91,6 @@
       }
     }
 
-    /* AREA FOTO UTAMA - Bisa diklik */
     .photo-area {
       background: rgba(0, 0, 0, 0.35);
       border-radius: 1.8rem;
@@ -145,7 +143,6 @@
       flex-wrap: wrap;
     }
 
-    /* HALAMAN SPEK / GALERI */
     .spek-page {
       display: none;
     }
@@ -186,7 +183,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Grid spek / daftar thumbnail */
     .spek-grid {
       display: flex;
       flex-direction: column;
@@ -219,7 +215,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
       overflow: hidden;
     }
 
@@ -243,6 +238,56 @@
     .spek-desc {
       font-size: 0.7rem;
       color: #aab8e5;
+    }
+
+    /* MENU PAKET RENTAL - DI PALING BAWAH */
+    .rental-section {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 140, 70, 0.3);
+    }
+
+    .rental-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #FFB347;
+      margin-bottom: 1rem;
+    }
+
+    .price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-item {
+      background: rgba(255, 125, 50, 0.12);
+      padding: 0.8rem 1.2rem;
+      border-radius: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-left: 3px solid #ff7e33;
+    }
+
+    .price-item:hover {
+      background: rgba(255, 125, 50, 0.25);
+      transform: translateX(5px);
+    }
+
+    .price-item span:first-child {
+      color: #FFD966;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .price-item span:last-child {
+      color: #ffaa66;
+      font-weight: 700;
+      font-size: 1rem;
     }
 
     .btn-exit {
@@ -269,7 +314,7 @@
       margin: 1rem 0;
     }
 
-    /* MODAL FULLSCREEN GAMBAR */
+    /* MODAL FULLSCREEN */
     .modal {
       display: none;
       position: fixed;
@@ -307,7 +352,6 @@
       border-radius: 1rem;
     }
 
-    /* Tombol-tombol di modal */
     .modal-buttons {
       position: absolute;
       top: -50px;
@@ -337,7 +381,6 @@
 
     .modal-btn-wa:hover {
       transform: scale(1.05);
-      background: linear-gradient(95deg, #30d978, #15a38a);
     }
 
     .modal-btn-close {
@@ -360,8 +403,11 @@
       .spek-title {
         font-size: 1.4rem;
       }
-      .spek-item {
-        padding: 0.8rem 1rem;
+      .rental-title {
+        font-size: 1.1rem;
+      }
+      .price-item span:first-child {
+        font-size: 0.85rem;
       }
       .modal-buttons {
         top: -45px;
@@ -384,7 +430,6 @@
 
         <div class="photo-area" id="clickablePhoto">
           <div class="photo-frame">
-            <!-- FOTO UTAMA (bisa diganti nanti) -->
             <img src="akunffspek1.jpg" alt="Foto Utama Akun FF" onerror="this.src='https://placehold.co/400x500/1e2a3a/ff7e33?text=Akun+FF+Premium'">
           </div>
           <div class="click-hint">👇 TEKAN FOTO UNTUK LIHAT SPEK AKUN 👇</div>
@@ -398,14 +443,13 @@
       </div>
     </div>
 
-    <!-- HALAMAN SPEK / DAFTAR GAMBAR -->
+    <!-- HALAMAN SPEK + PAKET RENTAL DI PALING BAWAH -->
     <div id="spekPage" class="spek-page">
       <div class="card">
         <div class="spek-title">📸 SPEK AKUN FREE FIRE</div>
         <div class="spek-sub">Klik salah satu untuk lihat detail</div>
 
         <div class="spek-grid">
-          <!-- Spek 1 -->
           <div class="spek-item" data-image="akunffspek1.jpg" data-name="ARMORY & SHOTGUNS" data-detail="M1887 • Rapper Underworld • Damage M1887 Lv.14">
             <div class="spek-thumb">
               <img src="akunffspek1.jpg" alt="thumb1" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=1'">
@@ -416,7 +460,6 @@
             </div>
           </div>
 
-          <!-- Spek 2 -->
           <div class="spek-item" data-image="akunffspek2.jpg" data-name="VAULT & FASHION" data-detail="241 Fashion • 280 Skillskin • 201 Postur • Collection">
             <div class="spek-thumb">
               <img src="akunffspek2.jpg" alt="thumb2" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=2'">
@@ -427,7 +470,6 @@
             </div>
           </div>
 
-          <!-- Spek 3 -->
           <div class="spek-item" data-image="akunffspek3.jpg" data-name="BLUELOCK & EMOTE" data-detail="Emote BLUELOCK • RAMPAGE • Dynamic Duo M(Top)">
             <div class="spek-thumb">
               <img src="akunffspek3.jpg" alt="thumb3" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=3'">
@@ -438,7 +480,6 @@
             </div>
           </div>
 
-          <!-- Spek 4 -->
           <div class="spek-item" data-image="akunffspek4.jpg" data-name="PARADOX & COLLECTION" data-detail="Paradox of Enlightenment • Hyperbook • Kendaraan">
             <div class="spek-thumb">
               <img src="akunffspek4.jpg" alt="thumb4" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=4'">
@@ -449,7 +490,6 @@
             </div>
           </div>
 
-          <!-- Spek 5 -->
           <div class="spek-item" data-image="akunffspek5.jpg" data-name="GALLERY & ARTIFACT" data-detail="438 Total • Mythic 82 • Epic 119 • Rare 233">
             <div class="spek-thumb">
               <img src="akunffspek5.jpg" alt="thumb5" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=5'">
@@ -461,9 +501,34 @@
           </div>
         </div>
 
-        <hr>
-        <div style="font-size: 0.7rem; color: #bbccff; margin: 0.3rem 0;">
-          📸 Klik spek untuk lihat gambar fullscreen
+        <!-- MENU PAKET RENTAL - DI PALING BAWAH (jauh dari detail spek) -->
+        <div class="rental-section">
+          <div class="price-list">
+            <div class="price-item" data-paket="1 JAM 5K">
+              <span>⏱️ 1 JAM</span>
+              <span>5K</span>
+            </div>
+            <div class="price-item" data-paket="2 JAM 8K">
+              <span>⏱️ 2 JAM</span>
+              <span>8K</span>
+            </div>
+            <div class="price-item" data-paket="3 JAM 13K">
+              <span>⏱️ 3 JAM</span>
+              <span>13K</span>
+            </div>
+            <div class="price-item" data-paket="PAKET SEKOLAH 25K">
+              <span>📚 PAKET SEKOLAH</span>
+              <span>25K</span>
+            </div>
+            <div class="price-item" data-paket="PAKET MALAM 25K">
+              <span>🌙 PAKET MALAM</span>
+              <span>25K</span>
+            </div>
+            <div class="price-item" data-paket="HARIAN 45K">
+              <span>📆 HARIAN</span>
+              <span>45K</span>
+            </div>
+          </div>
         </div>
 
         <button class="btn-exit" id="exitButton">◀ KEMBALI KE HALAMAN UTAMA</button>
@@ -471,7 +536,7 @@
     </div>
   </div>
 
-  <!-- MODAL FULLSCREEN GAMBAR -->
+  <!-- MODAL FULLSCREEN -->
   <div id="imageModal" class="modal">
     <div class="modal-content">
       <div class="modal-buttons">
@@ -488,16 +553,19 @@
     const clickablePhoto = document.getElementById('clickablePhoto');
     const exitBtn = document.getElementById('exitButton');
     const spekItems = document.querySelectorAll('.spek-item');
+    const priceItems = document.querySelectorAll('.price-item');
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const modalWaBtn = document.getElementById('modalWaBtn');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
 
-    // Variabel untuk menyimpan data spek yang sedang dilihat
     let currentSpekName = "";
     let currentSpekDetail = "";
 
-    // Saat klik FOTO UTAMA → pindah ke halaman spek
+    // GANTI NOMOR WHATSAPP DI SINI
+    const phoneNumber = "6281330269327";
+
+    // Klik foto utama -> ke halaman spek
     clickablePhoto.addEventListener('click', function() {
       mainPage.style.transition = 'opacity 0.25s ease';
       mainPage.style.opacity = '0';
@@ -511,7 +579,7 @@
       }, 250);
     });
 
-    // Tombol KELUAR → balik ke halaman utama
+    // Tombol keluar
     exitBtn.addEventListener('click', function() {
       spekPage.style.opacity = '0';
       spekPage.style.transform = 'scale(0.96)';
@@ -532,7 +600,7 @@
       }, 200);
     });
 
-    // Klik item spek → buka modal fullscreen gambar
+    // Klik item spek -> buka modal
     spekItems.forEach(item => {
       item.addEventListener('click', function() {
         const imageSrc = this.getAttribute('data-image');
@@ -543,16 +611,21 @@
       });
     });
 
-    // Tombol WhatsApp di modal
-    modalWaBtn.addEventListener('click', function() {
-      // Nomor WhatsApp (GANTI DENGAN NOMOR KAMU)
-      const phoneNumber = "6281330269327";
-      const message = `Min, aku mau beli spek akun *${currentSpekName}* - ${currentSpekDetail}. Apakah masih tersedia?`;
-      const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+    // Klik paket rental -> WA dengan pesan "Min, mau order [paket]"
+    priceItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const paket = this.getAttribute('data-paket');
+        const message = `Min, mau order ${paket}`;
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+      });
     });
 
-    // Tutup modal
+    // Tombol WA di modal
+    modalWaBtn.addEventListener('click', function() {
+      const message = `Min, aku mau beli spek akun *${currentSpekName}* - ${currentSpekDetail}. Apakah masih tersedia?`;
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    });
+
     function closeModal() {
       modal.classList.remove('active');
       setTimeout(() => {
@@ -564,12 +637,9 @@
 
     modalCloseBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
+      if (e.target === modal) closeModal();
     });
 
-    // State awal
     mainPage.classList.remove('hide');
     spekPage.classList.remove('active');
     mainPage.style.opacity = '1';
