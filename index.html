@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Rell'z Rent | Rental Akun FF</title>
+  <title>Rell'z Rent | Spek Akun FF</title>
   <style>
     * {
       margin: 0;
@@ -92,7 +92,7 @@
       }
     }
 
-    /* AREA FOTO - Bisa diklik */
+    /* AREA FOTO UTAMA - Bisa diklik */
     .photo-area {
       background: rgba(0, 0, 0, 0.35);
       border-radius: 1.8rem;
@@ -145,12 +145,12 @@
       flex-wrap: wrap;
     }
 
-    /* HALAMAN HARGA */
-    .price-page {
+    /* HALAMAN SPEK / GALERI */
+    .spek-page {
       display: none;
     }
 
-    .price-page.active {
+    .spek-page.active {
       display: block;
       animation: scaleFadeIn 0.45s ease forwards;
     }
@@ -170,8 +170,8 @@
       }
     }
 
-    .price-title {
-      font-size: 2rem;
+    .spek-title {
+      font-size: 1.8rem;
       font-weight: 800;
       background: linear-gradient(135deg, #FFB347, #FF5722);
       background-clip: text;
@@ -180,44 +180,69 @@
       margin-bottom: 0.3rem;
     }
 
-    .price-sub {
+    .spek-sub {
       color: #aaaaff;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin-bottom: 1.5rem;
     }
 
-    .price-list {
-      margin: 1.2rem 0;
-      text-align: left;
+    /* Grid spek / daftar thumbnail */
+    .spek-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin: 1rem 0;
     }
 
-    .price-item {
+    .spek-item {
       background: rgba(255, 125, 50, 0.12);
-      margin: 0.7rem 0;
-      padding: 0.9rem 1.2rem;
+      padding: 1rem 1.2rem;
       border-radius: 1.2rem;
       display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      border-left: 4px solid #ff7e33;
-      transition: all 0.2s;
+      align-items: center;
+      gap: 1rem;
       cursor: pointer;
+      transition: all 0.2s ease;
+      border-left: 4px solid #ff7e33;
     }
 
-    .price-item:hover {
+    .spek-item:hover {
       background: rgba(255, 125, 50, 0.25);
       transform: translateX(5px);
     }
 
-    .price-item span:first-child {
+    .spek-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 1rem;
+      background: #0f1420;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      overflow: hidden;
+    }
+
+    .spek-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .spek-info {
+      flex: 1;
+      text-align: left;
+    }
+
+    .spek-name {
+      font-weight: 700;
       color: #FFD966;
       font-size: 1rem;
     }
 
-    .price-item span:last-child {
-      color: #ffaa66;
-      font-weight: 800;
-      font-size: 1.1rem;
+    .spek-desc {
+      font-size: 0.7rem;
+      color: #aab8e5;
     }
 
     .btn-exit {
@@ -244,6 +269,87 @@
       margin: 1rem 0;
     }
 
+    /* MODAL FULLSCREEN GAMBAR */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeInModal 0.3s ease;
+    }
+
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 1rem;
+    }
+
+    /* Tombol-tombol di modal */
+    .modal-buttons {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .modal-btn {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 140, 70, 0.5);
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .modal-btn-wa {
+      background: linear-gradient(95deg, #25D366, #128C7E);
+      border: none;
+    }
+
+    .modal-btn-wa:hover {
+      transform: scale(1.05);
+      background: linear-gradient(95deg, #30d978, #15a38a);
+    }
+
+    .modal-btn-close {
+      background: rgba(255, 70, 30, 0.85);
+      border: none;
+    }
+
+    .modal-btn-close:hover {
+      background: #ff5722;
+      transform: scale(1.05);
+    }
+
     @media (max-width: 550px) {
       .card {
         padding: 1.5rem;
@@ -251,31 +357,37 @@
       .title-smooth {
         font-size: 2.5rem;
       }
-      .price-title {
-        font-size: 1.5rem;
+      .spek-title {
+        font-size: 1.4rem;
       }
-      .price-item span:first-child {
-        font-size: 0.9rem;
+      .spek-item {
+        padding: 0.8rem 1rem;
+      }
+      .modal-buttons {
+        top: -45px;
+        gap: 0.5rem;
+      }
+      .modal-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.7rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- HALAMAN UTAMA (foto saja) -->
+    <!-- HALAMAN UTAMA (foto utama) -->
     <div id="mainPage" class="main-page">
       <div class="card">
-        <!-- Rell'z Rent paling atas + efek smooth -->
         <div class="title-smooth">Rell'z Rent</div>
         <div class="sub-text">Kami Menyediakan Akun Free Fire Rental</div>
 
-        <!-- AREA FOTO BISA DI KLIK -->
         <div class="photo-area" id="clickablePhoto">
           <div class="photo-frame">
-            <!-- GANTI NAMA FILE FOTO DI SINI -->
-            <img src="akun_ff1.jpg" alt="Foto Akun Free Fire" onerror="this.src='https://placehold.co/400x500/1e2a3a/ff7e33?text=Akun+FF+Premium'">
+            <!-- FOTO UTAMA (bisa diganti nanti) -->
+            <img src="akunffspek1.jpg" alt="Foto Utama Akun FF" onerror="this.src='https://placehold.co/400x500/1e2a3a/ff7e33?text=Akun+FF+Premium'">
           </div>
-          <div class="click-hint">👇 TEKAN FOTO UNTUK LIHAT HARGA SEWA 👇</div>
+          <div class="click-hint">👇 TEKAN FOTO UNTUK LIHAT SPEK AKUN 👇</div>
         </div>
 
         <div class="footer-note">
@@ -286,43 +398,72 @@
       </div>
     </div>
 
-    <!-- HALAMAN HARGA LENGKAP (muncul setelah klik foto) -->
-    <div id="pricePage" class="price-page">
+    <!-- HALAMAN SPEK / DAFTAR GAMBAR -->
+    <div id="spekPage" class="spek-page">
       <div class="card">
-        <div class="price-title">READY AKUN RENTAL</div>
-        <div class="price-sub">✨ Free Fire • M1887 Lv.14 ✨</div>
+        <div class="spek-title">📸 SPEK AKUN FREE FIRE</div>
+        <div class="spek-sub">Klik salah satu untuk lihat detail</div>
 
-        <div class="price-list">
-          <div class="price-item" data-paket="1 JAM - 5K">
-            <span>⏱️ 1 JAM</span>
-            <span>5K</span>
+        <div class="spek-grid">
+          <!-- Spek 1 -->
+          <div class="spek-item" data-image="akunffspek1.jpg" data-name="ARMORY & SHOTGUNS" data-detail="M1887 • Rapper Underworld • Damage M1887 Lv.14">
+            <div class="spek-thumb">
+              <img src="akunffspek1.jpg" alt="thumb1" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=1'">
+            </div>
+            <div class="spek-info">
+              <div class="spek-name">🔥 ARMORY & SHOTGUNS</div>
+              <div class="spek-desc">M1887 • Rapper Underworld • Damage M1887 Lv.14</div>
+            </div>
           </div>
-          <div class="price-item" data-paket="2 JAM - 8K">
-            <span>⏱️ 2 JAM</span>
-            <span>8K</span>
+
+          <!-- Spek 2 -->
+          <div class="spek-item" data-image="akunffspek2.jpg" data-name="VAULT & FASHION" data-detail="241 Fashion • 280 Skillskin • 201 Postur • Collection">
+            <div class="spek-thumb">
+              <img src="akunffspek2.jpg" alt="thumb2" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=2'">
+            </div>
+            <div class="spek-info">
+              <div class="spek-name">👕 VAULT & FASHION</div>
+              <div class="spek-desc">241 Fashion • 280 Skillskin • 201 Postur • Collection</div>
+            </div>
           </div>
-          <div class="price-item" data-paket="3 JAM - 13K">
-            <span>⏱️ 3 JAM</span>
-            <span>13K</span>
+
+          <!-- Spek 3 -->
+          <div class="spek-item" data-image="akunffspek3.jpg" data-name="BLUELOCK & EMOTE" data-detail="Emote BLUELOCK • RAMPAGE • Dynamic Duo M(Top)">
+            <div class="spek-thumb">
+              <img src="akunffspek3.jpg" alt="thumb3" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=3'">
+            </div>
+            <div class="spek-info">
+              <div class="spek-name">💙 BLUELOCK & EMOTE</div>
+              <div class="spek-desc">Emote BLUELOCK • RAMPAGE • Dynamic Duo M(Top)</div>
+            </div>
           </div>
-          <div class="price-item" data-paket="PAKET SEKOLAH - 25K">
-            <span>📚 PAKET SEKOLAH</span>
-            <span>25K</span>
+
+          <!-- Spek 4 -->
+          <div class="spek-item" data-image="akunffspek4.jpg" data-name="PARADOX & COLLECTION" data-detail="Paradox of Enlightenment • Hyperbook • Kendaraan">
+            <div class="spek-thumb">
+              <img src="akunffspek4.jpg" alt="thumb4" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=4'">
+            </div>
+            <div class="spek-info">
+              <div class="spek-name">✨ PARADOX & COLLECTION</div>
+              <div class="spek-desc">Paradox of Enlightenment • Hyperbook • Kendaraan</div>
+            </div>
           </div>
-          <div class="price-item" data-paket="PAKET MALAM - 25K">
-            <span>🌙 PAKET MALAM</span>
-            <span>25K</span>
-          </div>
-          <div class="price-item" data-paket="HARIAN - 45K">
-            <span>📆 HARIAN</span>
-            <span>45K</span>
+
+          <!-- Spek 5 -->
+          <div class="spek-item" data-image="akunffspek5.jpg" data-name="GALLERY & ARTIFACT" data-detail="438 Total • Mythic 82 • Epic 119 • Rare 233">
+            <div class="spek-thumb">
+              <img src="akunffspek5.jpg" alt="thumb5" onerror="this.src='https://placehold.co/50x50/ff7e33/white?text=5'">
+            </div>
+            <div class="spek-info">
+              <div class="spek-name">🎨 GALLERY & ARTIFACT</div>
+              <div class="spek-desc">438 Total • Mythic 82 • Epic 119 • Rare 233</div>
+            </div>
           </div>
         </div>
 
         <hr>
-        <div style="font-size: 0.75rem; color: #bbccff; margin: 0.3rem 0;">
-          ✅ Klik paket untuk order via WhatsApp<br>
-          ✅ Akun langsung aktif
+        <div style="font-size: 0.7rem; color: #bbccff; margin: 0.3rem 0;">
+          📸 Klik spek untuk lihat gambar fullscreen
         </div>
 
         <button class="btn-exit" id="exitButton">◀ KEMBALI KE HALAMAN UTAMA</button>
@@ -330,38 +471,57 @@
     </div>
   </div>
 
+  <!-- MODAL FULLSCREEN GAMBAR -->
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-wa" id="modalWaBtn">📱 Hubungi Admin Sekarang</button>
+        <button class="modal-btn modal-btn-close" id="modalCloseBtn">✕ Tutup</button>
+      </div>
+      <img id="modalImage" src="" alt="Fullscreen">
+    </div>
+  </div>
+
   <script>
     const mainPage = document.getElementById('mainPage');
-    const pricePage = document.getElementById('pricePage');
+    const spekPage = document.getElementById('spekPage');
     const clickablePhoto = document.getElementById('clickablePhoto');
     const exitBtn = document.getElementById('exitButton');
-    const priceItems = document.querySelectorAll('.price-item');
+    const spekItems = document.querySelectorAll('.spek-item');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalWaBtn = document.getElementById('modalWaBtn');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
 
-    // Saat klik FOTO → pindah ke halaman harga dengan efek smooth
+    // Variabel untuk menyimpan data spek yang sedang dilihat
+    let currentSpekName = "";
+    let currentSpekDetail = "";
+
+    // Saat klik FOTO UTAMA → pindah ke halaman spek
     clickablePhoto.addEventListener('click', function() {
       mainPage.style.transition = 'opacity 0.25s ease';
       mainPage.style.opacity = '0';
       setTimeout(() => {
         mainPage.classList.add('hide');
         mainPage.style.opacity = '';
-        pricePage.classList.add('active');
-        pricePage.style.animation = 'none';
-        pricePage.offsetHeight;
-        pricePage.style.animation = 'scaleFadeIn 0.45s ease forwards';
+        spekPage.classList.add('active');
+        spekPage.style.animation = 'none';
+        spekPage.offsetHeight;
+        spekPage.style.animation = 'scaleFadeIn 0.45s ease forwards';
       }, 250);
     });
 
     // Tombol KELUAR → balik ke halaman utama
     exitBtn.addEventListener('click', function() {
-      pricePage.style.opacity = '0';
-      pricePage.style.transform = 'scale(0.96)';
-      pricePage.style.transition = 'all 0.2s ease';
+      spekPage.style.opacity = '0';
+      spekPage.style.transform = 'scale(0.96)';
+      spekPage.style.transition = 'all 0.2s ease';
       
       setTimeout(() => {
-        pricePage.classList.remove('active');
-        pricePage.style.opacity = '';
-        pricePage.style.transform = '';
-        pricePage.style.transition = '';
+        spekPage.classList.remove('active');
+        spekPage.style.opacity = '';
+        spekPage.style.transform = '';
+        spekPage.style.transition = '';
         
         mainPage.classList.remove('hide');
         mainPage.style.opacity = '0';
@@ -372,19 +532,46 @@
       }, 200);
     });
 
-    // Klik item harga → langsung order WhatsApp
-    priceItems.forEach(item => {
+    // Klik item spek → buka modal fullscreen gambar
+    spekItems.forEach(item => {
       item.addEventListener('click', function() {
-        const paket = this.getAttribute('data-paket');
-        const phoneNumber = "6281330269327"; // GANTI DENGAN NOMOR WHATSAPP KAMU
-        const message = `Halo Kak, saya mau rental akun FF dengan paket: ${paket}. Apakah masih tersedia?`;
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        const imageSrc = this.getAttribute('data-image');
+        currentSpekName = this.getAttribute('data-name');
+        currentSpekDetail = this.getAttribute('data-detail');
+        modalImage.src = imageSrc;
+        modal.classList.add('active');
       });
+    });
+
+    // Tombol WhatsApp di modal
+    modalWaBtn.addEventListener('click', function() {
+      // Nomor WhatsApp (GANTI DENGAN NOMOR KAMU)
+      const phoneNumber = "6281330269327";
+      const message = `Min, aku mau beli spek akun *${currentSpekName}* - ${currentSpekDetail}. Apakah masih tersedia?`;
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+    });
+
+    // Tutup modal
+    function closeModal() {
+      modal.classList.remove('active');
+      setTimeout(() => {
+        modalImage.src = '';
+        currentSpekName = "";
+        currentSpekDetail = "";
+      }, 300);
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
     });
 
     // State awal
     mainPage.classList.remove('hide');
-    pricePage.classList.remove('active');
+    spekPage.classList.remove('active');
     mainPage.style.opacity = '1';
   </script>
 </body>
